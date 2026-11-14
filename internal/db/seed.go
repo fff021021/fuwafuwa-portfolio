@@ -34,8 +34,9 @@ func SeedData(db *sql.DB) error {
 		"default_profile",
 		"FUWAFUWA DEV",
 		"Game Server Engineer Applicant",
-		"ゲーム開発会社でのサーバーサイドエンジニアを志望しています。Go言語による並行処理（goroutine/channel）や低フットプリントなAPIサーバー設計、分散システム、リアルタイム通信に関心を持っています。大規模なトラフィック下でも淀みなくパケットを捌き切るアーキテクチャの美しさに惹かれ、日々自作ツールやプロトタイプの開発、インフラ技術の学習に取り組んでいます。",
-		"高い並行性と低レイテンシを追求し、プレイヤーがストレスを感じない盤石な世界基盤を組む。",
+		"現在、Webサイトやコンソールゲームを始めとした開発に取り組んでいます。Go言語による並行処理（goroutine/channel）や低フットプリントなAPIサーバー設計、分散システム、リアルタイム通信に関心を持っています。
+        日々自作ツールやプロトタイプの開発、インフラ技術の学習に取り組んでいます。",
+		"2007年2月1日生",
 		`["Go言語 (net/http)", "並行並列処理", "リアルタイム通信", "SQLite / RDBMS", "REST API設計", "低レイテンシ", "ゲームループ設計"]`,
 		`{"go": 88, "concurrency": 85, "db": 80, "network": 82, "curiosity": 98}`,
 	)
@@ -53,8 +54,10 @@ func SeedData(db *sql.DB) error {
 			id:         "work-01",
 			title:      "FUWAFUWA PORTFOLIO",
 			category:   "web",
-			tagline:    "Digital Playground × 雑誌エディトリアルの自己紹介Webアプリ",
-			desc:       "ゲーム開発会社のサーバーエンジニア向けインターンシップ応募作品として自作した、フルスタックWebポートフォリオです。Goのnet/httpとPure-Go SQLiteで構築されたバックエンドAPIと、Vanilla JSによるリッチなインタラクティブUIが協調動作します。",
+			tagline:    "ゲーム×ポートフォリオ",
+			desc:       "本サイトは、雑誌風の自己紹介ポートフォリオです。
+            単なる静的な実績紹介にとどまらず、クイズや隠し実績、ランダムガチャなど様々な要素を一本化。
+            雑誌をめくるような知的好奇心と、ゲームを遊ぶようなインタラクティブな楽しさを是非体感してください。",
 			techs:      `["Go", "net/http", "SQLite", "Vanilla JS", "Web Audio API", "CSS3"]`,
 			highlights: "【試行錯誤・こだわり】外部の重厚なフレームワークに頼らず、Go標準ライブラリのHTTPサーバーとPure-Go SQLiteを採用。Cgo不要でポータブルに起動でき、メモリ効率と起動速度を極限まで高めました。クイズ採点をサーバーサイドで厳格に判定するREST API設計を取り入れています。",
 			demo:       "#00-index",
