@@ -189,10 +189,10 @@ function initArchiveSection() {
     const linkArea = document.getElementById('modal-links');
     linkArea.innerHTML = '';
     if (work.github_url) {
-      linkArea.innerHTML += `<a href="${work.github_url}" target="_blank" rel="noopener" class="brutal-btn brutal-btn-yellow" style="font-size: 0.9rem;">GITHUB REPO ↗</a>`;
+      linkArea.innerHTML += `<a href="${work.github_url}" target="_blank" rel="noopener" class="brutal-btn brutal-btn-yellow" style="font-size: 0.95rem;">GITHUB REPO ↗</a>`;
     }
     if (work.demo_url) {
-      linkArea.innerHTML += `<a href="${work.demo_url}" target="_blank" rel="noopener" class="brutal-btn brutal-btn-cyan" style="font-size: 0.9rem;">LIVE DEMO ↗</a>`;
+      linkArea.innerHTML += `<a href="${work.demo_url}" target="_blank" rel="noopener" class="brutal-btn brutal-btn-cyan" style="font-size: 0.95rem;">LIVE DEMO ↗</a>`;
     }
 
     modalBackdrop.classList.add('active');
@@ -220,11 +220,11 @@ async function loadLogs() {
     if (!logs || logs.length === 0) return;
 
     container.innerHTML = logs.map(log => `
-      <div style="border-bottom: 1px dashed var(--color-gray-300); padding: 0.75rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.85rem;">
+      <div style="border-bottom: 1px dashed var(--color-gray-300); padding: 1.1rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1.25rem; font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.6;">
         <div>
-          <span style="color: var(--color-pink); font-weight: 700;">[${log.date}]</span>
-          <span style="font-weight: 600; margin-left: 0.5rem; color: var(--color-black);">${log.title}</span>
-          <span style="display: block; font-size: 0.8rem; color: var(--color-gray-700); margin-top: 0.2rem;">${log.content}</span>
+          <span style="color: var(--color-pink); font-weight: 800;">[${log.date}]</span>
+          <span style="font-weight: 700; margin-left: 0.6rem; color: #171717;">${log.title}</span>
+          <span style="display: block; font-size: 0.85rem; color: #4B5563; margin-top: 0.35rem; line-height: 1.6;">${log.content}</span>
         </div>
         ${log.metrics ? `<span class="brutal-badge brutal-badge-cyan" style="white-space: nowrap;">${log.metrics}</span>` : ''}
       </div>

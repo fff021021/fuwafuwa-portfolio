@@ -1,11 +1,12 @@
-/* ネオブルータリズム・エディトリアル コンポーネント */
+/* ネオブルータリズム・エディトリアル コンポーネント（可読性・高コントラスト改善版） */
 
 /* ネオブルータリズム カード */
 .brutal-card {
   background: var(--color-white);
+  color: var(--color-black);
   border: var(--border-bold);
   box-shadow: var(--shadow-md);
-  padding: 1.5rem;
+  padding: 2rem;
   position: relative;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
@@ -41,7 +42,7 @@
   color: var(--color-white);
   border: var(--border-bold);
   box-shadow: var(--shadow-pink);
-  padding: 1.5rem;
+  padding: 2rem;
 }
 
 /* ネオブルータリズム ボタン */
@@ -49,17 +50,17 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 900;
-  padding: 0.6rem 1.4rem;
+  padding: 0.75rem 1.5rem;
   background: var(--color-white);
   border: var(--border-bold);
   box-shadow: var(--shadow-sm);
-  color: var(--color-black);
+  color: var(--color-black) !important;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
   transition: all var(--transition-fast);
   cursor: pointer;
   user-select: none;
@@ -77,23 +78,28 @@
 
 .brutal-btn-pink {
   background: var(--color-pink);
-  color: var(--color-white);
+  color: #FFFFFF !important;
 }
 
 .brutal-btn-cyan {
   background: var(--color-cyan);
-  color: var(--color-black);
+  color: var(--color-black) !important;
 }
 
 .brutal-btn-yellow {
   background: var(--color-yellow);
-  color: var(--color-black);
+  color: var(--color-black) !important;
 }
 
 .brutal-btn-dark {
   background: var(--color-black);
-  color: var(--color-white);
+  color: #FFFFFF !important;
   box-shadow: var(--shadow-cyan);
+}
+
+.brutal-btn-white {
+  background: #FFFFFF;
+  color: var(--color-black) !important;
 }
 
 /* バッジ & ラベル */
@@ -102,37 +108,40 @@
   align-items: center;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.2rem 0.6rem;
+  font-weight: 800;
+  padding: 0.3rem 0.7rem;
   border: var(--border-thin);
   box-shadow: 2px 2px 0 var(--color-black);
   text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
 }
 
-.brutal-badge-pink { background: var(--color-pink); color: #fff; }
-.brutal-badge-cyan { background: var(--color-cyan); color: #000; }
-.brutal-badge-yellow { background: var(--color-yellow); color: #000; }
-.brutal-badge-dark { background: var(--color-black); color: #fff; }
+.brutal-badge-pink { background: var(--color-pink); color: #FFFFFF !important; }
+.brutal-badge-cyan { background: var(--color-cyan); color: #171717 !important; }
+.brutal-badge-yellow { background: var(--color-yellow); color: #171717 !important; }
+.brutal-badge-dark { background: var(--color-black); color: #FFFFFF !important; }
 
 /* チケット型ナビゲーションアイテム */
 .nav-ticket-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.25rem;
-  margin-top: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
 .nav-ticket {
   background: var(--color-white);
   border: var(--border-bold);
   box-shadow: var(--shadow-md);
-  padding: 1.2rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: left;
   position: relative;
   overflow: hidden;
+  color: var(--color-black) !important;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
@@ -142,7 +151,7 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 8px;
+  width: 10px;
   background: var(--color-black);
 }
 
@@ -158,22 +167,26 @@
 
 .nav-ticket-num {
   font-family: var(--font-display);
-  font-size: 1.8rem;
-  line-height: 1;
+  font-size: 2rem;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
 }
 
 .nav-ticket-title {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 900;
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
+  letter-spacing: 0.03em;
+  color: var(--color-black) !important;
 }
 
 .nav-ticket-desc {
   font-family: var(--font-body);
-  font-size: 0.85rem;
-  color: var(--color-gray-700);
-  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #374151;
+  margin-top: 0.75rem;
+  line-height: 1.6;
 }
 
 /* ドラッグ可能ステッカー */
@@ -198,8 +211,8 @@
   font-weight: 900;
   font-size: 0.95rem;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 0.4rem 0.8rem;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1rem;
   transition: transform 0.1s ease-out;
   transform-origin: center center;
 }
@@ -212,32 +225,32 @@
 
 .sticker-yellow {
   background: var(--color-yellow);
-  color: var(--color-black);
+  color: #171717 !important;
   transform: rotate(-5deg);
 }
 
 .sticker-pink {
   background: var(--color-pink);
-  color: var(--color-white);
+  color: #FFFFFF !important;
   transform: rotate(4deg);
 }
 
 .sticker-cyan {
   background: var(--color-cyan);
-  color: var(--color-black);
+  color: #171717 !important;
   transform: rotate(-2deg);
 }
 
 .sticker-star {
   border-radius: var(--radius-pill);
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
 }
 
 /* ステータスバー（レトロゲーム風） */
 .status-bar-container {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .status-bar-row {
@@ -245,17 +258,18 @@
   align-items: center;
   gap: 1rem;
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 .status-bar-label {
-  width: 140px;
-  font-weight: 700;
+  width: 160px;
+  font-weight: 800;
+  color: var(--color-black);
 }
 
 .status-bar-track {
   flex: 1;
-  height: 18px;
+  height: 20px;
   background: var(--color-gray-200);
   border: var(--border-thin);
   position: relative;
@@ -272,6 +286,7 @@
   font-weight: 800;
   width: 45px;
   text-align: right;
+  color: var(--color-black);
 }
 
 /* クイズUI */
@@ -279,7 +294,7 @@
   background: var(--color-white);
   border: var(--border-bold);
   box-shadow: var(--shadow-cyan);
-  padding: 2rem;
+  padding: 2.2rem;
 }
 
 .quiz-option-btn {
@@ -287,13 +302,16 @@
   width: 100%;
   text-align: left;
   background: var(--color-paper-bg);
+  color: #171717 !important;
   border: var(--border-thick);
   box-shadow: var(--shadow-sm);
-  padding: 0.9rem 1.2rem;
+  padding: 1rem 1.4rem;
   font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.8rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.9rem;
   transition: all var(--transition-fast);
   cursor: pointer;
   position: relative;
@@ -301,30 +319,32 @@
 
 .quiz-option-btn:hover:not(:disabled) {
   background: var(--color-yellow);
+  color: #171717 !important;
   transform: translate(-2px, -2px);
   box-shadow: var(--shadow-md);
 }
 
 .quiz-option-btn.selected {
   background: var(--color-cyan);
+  color: #171717 !important;
   border-color: var(--color-black);
 }
 
 .quiz-option-btn.correct {
   background: #10B981 !important;
-  color: #fff !important;
+  color: #FFFFFF !important;
 }
 
 .quiz-option-btn.wrong {
   background: var(--color-pink) !important;
-  color: #fff !important;
+  color: #FFFFFF !important;
 }
 
 /* モーダルダイアログ */
 .brutal-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -342,13 +362,14 @@
 
 .brutal-modal-content {
   background: var(--color-white);
+  color: var(--color-black);
   border: var(--border-bold);
   box-shadow: 12px 12px 0px var(--color-pink);
-  max-width: 720px;
+  max-width: 760px;
   width: 100%;
   max-height: 85vh;
   overflow-y: auto;
-  padding: 2rem;
+  padding: 2.5rem;
   transform: translateY(20px);
   transition: transform 0.2s ease;
   position: relative;
@@ -360,11 +381,12 @@
 
 .modal-close-btn {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 36px;
-  height: 36px;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 38px;
+  height: 38px;
   background: var(--color-yellow);
+  color: var(--color-black);
   border: var(--border-thick);
   box-shadow: 2px 2px 0 var(--color-black);
   display: flex;
@@ -376,17 +398,17 @@
 }
 .modal-close-btn:hover {
   background: var(--color-pink);
-  color: #fff;
+  color: #FFFFFF;
 }
 
-/* トースト通知（実績解除・シークレット発見用） */
+/* トースト通知 */
 .toast-container {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  bottom: 2rem;
+  right: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.8rem;
   z-index: 1100;
   pointer-events: none;
 }
@@ -394,15 +416,15 @@
 .brutal-toast {
   pointer-events: auto;
   background: var(--color-yellow);
-  color: var(--color-black);
+  color: var(--color-black) !important;
   border: var(--border-bold);
   box-shadow: var(--shadow-md);
-  padding: 0.8rem 1.4rem;
+  padding: 1rem 1.6rem;
   font-family: var(--font-mono);
   font-weight: 700;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1rem;
   transform: translateX(120%);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }

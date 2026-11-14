@@ -185,22 +185,22 @@ class QuizController {
     }
 
     this.container.innerHTML = `
-      <div class="quiz-box" style="text-align: center; padding: 2.5rem 1.5rem;">
-        <span class="brutal-badge brutal-badge-dark" style="margin-bottom: 1rem;">CHALLENGE COMPLETE</span>
+      <div class="quiz-box" style="text-align: center; padding: 3rem 2rem;">
+        <span class="brutal-badge brutal-badge-dark" style="margin-bottom: 1.25rem;">CHALLENGE COMPLETE</span>
         
-        <h3 style="font-family: var(--font-display); font-size: 2.4rem; margin-bottom: 0.5rem;">
+        <h3 style="font-family: var(--font-display); font-size: 2.4rem; margin-bottom: 0.75rem; letter-spacing: 0.02em; color: var(--color-black);">
           FINAL SCORE: <span style="color: var(--color-pink);">${this.score}</span> / ${maxScore}
         </h3>
 
-        <div style="display: inline-block; margin: 1.5rem 0; padding: 1.5rem 2.5rem; background: var(--color-black); color: ${rankColor}; border: var(--border-bold); box-shadow: var(--shadow-yellow); font-family: var(--font-display); font-size: 5rem; line-height: 1;">
+        <div style="display: inline-block; margin: 1.5rem 0; padding: 1.5rem 3rem; background: var(--color-black); color: ${rankColor}; border: var(--border-bold); box-shadow: var(--shadow-yellow); font-family: var(--font-display); font-size: 5rem; line-height: 1; letter-spacing: 0.05em;">
           RANK: ${rank}
         </div>
 
-        <p style="font-family: var(--font-mono); font-size: 1rem; color: var(--color-gray-900); max-width: 480px; margin: 0 auto 2rem; line-height: 1.6;">
+        <p style="font-family: var(--font-mono); font-size: 1.05rem; color: #1F2937; max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.8;">
           ${comment}
         </p>
 
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <div style="display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;">
           <button class="brutal-btn brutal-btn-yellow" onclick="window.QuizApp.init()">
             🔄 もう一度挑戦する
           </button>
