@@ -1,10 +1,13 @@
-// ドラッグ可能ステッカー機能（Digital Playground）
+// ドラッグ可能ステッカー機能（Digital Playground - デルタ加算による正確な追従）
 class StickerManager {
   constructor() {
     this.stickers = [];
     this.isDragging = false;
     this.currentSticker = null;
-    this.offset = { x: 0, y: 0 };
+    this.startX = 0;
+    this.startY = 0;
+    this.initialLeft = 0;
+    this.initialTop = 0;
     this.dragCount = 0;
   }
 
@@ -13,6 +16,17 @@ class StickerManager {
     if (!this.stickers.length) return;
 
     this.stickers.forEach((sticker) => {
+      // 初期パーセント位置をピクセルに変換して固定（初回ドラッグ時のズレ防止）
+      const rect = sticker.getBoundingClientRect();
+      const parentRect = sticker.offsetParent ? sticker.offsetParent.getBoundingClientRect() : { left: 0, top: 0 };
+      const currentLeft = rect.left - parentRect.left;
+      const currentTop = rect.top - parentRect.top;
+
+      sticker.style.left = `${currentLeft}px`;
+      sticker.style.top = `${currentTop}px`;
+      sticker.style.right = 'auto';
+      sticker.style.bottom = 'auto';
+
       // マウスイベント
       sticker.addEventListener('mousedown', (e) => this.onDragStart(e, sticker));
       // タッチイベント
@@ -41,9 +55,13 @@ class StickerManager {
     const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
     const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
 
-    const rect = sticker.getBoundingClientRect();
-    this.offset.x = clientX - rect.left;
-    this.offset.y = clientY - rect.top;
+    // ドラッグ開始時のポインタ位置
+    this.startX = clientX;
+    this.startY = clientY;
+
+    // ドラッグ開始時の要素の現在の位置（parseIntで数値取得）
+    this.initialLeft = parseFloat(sticker.style.left) || sticker.offsetLeft || 0;
+    this.initialTop = parseFloat(sticker.style.top) || sticker.offsetTop || 0;
 
     if (window.soundController) {
       window.soundController.playClick();
@@ -60,14 +78,13 @@ class StickerManager {
     const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
     const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
 
-    const containerRect = document.querySelector('.hero-cover').getBoundingClientRect();
-    let left = clientX - containerRect.left - this.offset.x;
-    let top = clientY - containerRect.top - this.offset.y;
+    // カーソルの移動量（デルタ）
+    const deltaX = clientX - this.startX;
+    const deltaY = clientY - this.startY;
 
-    this.currentSticker.style.left = `${left}px`;
-    this.currentSticker.style.top = `${top}px`;
-    this.currentSticker.style.right = 'auto';
-    this.currentSticker.style.bottom = 'auto';
+    // 移動量分だけ正確に加算
+    this.currentSticker.style.left = `${this.initialLeft + deltaX}px`;
+    this.currentSticker.style.top = `${this.initialTop + deltaY}px`;
 
     if (e.type.startsWith('touch')) {
       e.preventDefault();

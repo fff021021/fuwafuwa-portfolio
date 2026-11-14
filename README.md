@@ -192,3 +192,17 @@ go run ./cmd/server
 ```powershell
 go test -v ./...
 ```
+
+---
+
+## 9. 本番デプロイ (Production Deployment)
+
+本リポジトリには、無料クラウドサービス（Render, Fly.io）やDocker環境へのデプロイ構成がすべて完備されています。
+
+- **Render.com (推奨・無料)**: GitHubにプッシュし、Render上でWeb Serviceを作成するだけで自動HTTPS公開されます（`render.yaml` 完備）。
+- **Fly.io**: `fly launch` で東京リージョンの低レイテンシ環境に即時デプロイ（`fly.toml` 完備）。
+- **Docker Compose**: `docker compose up -d` でコンテナ起動。
+- **embed.FS 完全単一バイナリ**: 静的ファイル（HTML/CSS/JS）がGoバイナリ内に内包されているため、Linux実行ファイル1個だけでどこでも動きます。
+
+詳しい手順は [DEPLOYMENT.md](file:///c:/Users/higen/Desktop/portfolio/DEPLOYMENT.md) をご覧ください。
+
