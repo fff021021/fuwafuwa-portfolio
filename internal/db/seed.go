@@ -6,20 +6,9 @@ import (
 	"log"
 )
 
-// SeedData はデータベースが空の場合に初期マスターデータをトランザクションで投入します
+// SeedData は初期マスターデータをトランザクションで投入・更新します。
 func SeedData(db *sql.DB) error {
-	// プロフィールの存在確認
-	var count int
-	err := db.QueryRow("SELECT COUNT(*) FROM profiles").Scan(&count)
-	if err != nil {
-		return fmt.Errorf("データ件数確認エラー: %w", err)
-	}
-
-	if count > 0 {
-		return nil // 既にデータが存在する場合はスキップ
-	}
-
-	log.Println("シードデータの投入を開始します...")
+	log.Println("シードデータの投入・更新を開始します...")
 
 	// 整合性を保つためトランザクションを使用
 	tx, err := db.Begin()
@@ -28,14 +17,27 @@ func SeedData(db *sql.DB) error {
 	}
 	defer tx.Rollback()
 
-	// 1. プロフィール投入
-	profileQuery := `INSERT INTO profiles (id, name, role, bio, vision, keywords, stats) VALUES (?, ?, ?, ?, ?, ?, ?)`
+	// 1. プロフィール投入・更新
+	profileQuery := `
+INSERT INTO profiles (
+	id, name, role, bio, vision, keywords, stats
+)
+VALUES (?, ?, ?, ?, ?, ?, ?)
+ON CONFLICT(id) DO UPDATE SET
+	name = excluded.name,
+	role = excluded.role,
+	bio = excluded.bio,
+	vision = excluded.vision,
+	keywords = excluded.keywords,
+	stats = excluded.stats,
+	updated_at = CURRENT_TIMESTAMP
+`
+
 	_, err = tx.Exec(profileQuery,
 		"default_profile",
 		"FUWAFUWA DEV",
 		"Game Server Engineer Applicant",
-		"現在、Webサイトやコンソールゲームを始めとした開発に取り組んでいます。Go言語による並行処理（goroutine/channel）や低フットプリントなAPIサーバー設計、分散システム、リアルタイム通信に関心を持っています。
-        日々自作ツールやプロトタイプの開発、インフラ技術の学習に取り組んでいます。",
+		"現在、Webサイトやコンソールゲームを始めとした開発に取り組んでいます。Go言語による並行処理（goroutine/channel）や低フットプリントなAPIサーバー設計、分散システム、リアルタイム通信に関心を持っています。日々自作ツールやプロトタイプの開発、インフラ技術の学習に取り組んでいます。",
 		"2007年2月1日生",
 		`["Go言語 (net/http)", "並行並列処理", "リアルタイム通信", "SQLite / RDBMS", "REST API設計", "低レイテンシ", "ゲームループ設計"]`,
 		`{"go": 88, "concurrency": 85, "db": 80, "network": 82, "curiosity": 98}`,
@@ -44,8 +46,25 @@ func SeedData(db *sql.DB) error {
 		return fmt.Errorf("プロフィールシードエラー: %w", err)
 	}
 
-	// 2. 制作物・活動アーカイブ (Works) 投入
-	workQuery := `INSERT INTO works (id, title, category, tagline, description, technologies, highlights, demo_url, github_url, featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+	// 2. 制作物・活動アーカイブ (Works) 投入・更新
+	workQuery := `
+INSERT INTO works (
+	id, title, category, tagline, description,
+	technologies, highlights, demo_url, github_url, featured
+)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+ON CONFLICT(id) DO UPDATE SET
+	title = excluded.title,
+	category = excluded.category,
+	tagline = excluded.tagline,
+	description = excluded.description,
+	technologies = excluded.technologies,
+	highlights = excluded.highlights,
+	demo_url = excluded.demo_url,
+	github_url = excluded.github_url,
+	featured = excluded.featured
+`
+
 	works := []struct {
 		id, title, category, tagline, desc, techs, highlights, demo, github string
 		featured                                                            int
@@ -55,9 +74,7 @@ func SeedData(db *sql.DB) error {
 			title:      "FUWAFUWA PORTFOLIO",
 			category:   "web",
 			tagline:    "ゲーム×ポートフォリオ",
-			desc:       "本サイトは、雑誌風の自己紹介ポートフォリオです。
-            単なる静的な実績紹介にとどまらず、クイズや隠し実績、ランダムガチャなど様々な要素を一本化。
-            雑誌をめくるような知的好奇心と、ゲームを遊ぶようなインタラクティブな楽しさを是非体感してください。",
+			desc:       "本サイトは、雑誌風の自己紹介ポートフォリオです。単なる静的な実績紹介にとどまらず、クイズや隠し実績、ランダムガチャなど様々な要素を一本化。雑誌をめくるような知的好奇心と、ゲームを遊ぶようなインタラクティブな楽しさを是非体感してください。",
 			techs:      `["Go", "net/http", "SQLite", "Vanilla JS", "Web Audio API", "CSS3"]`,
 			highlights: "【試行錯誤・こだわり】外部の重厚なフレームワークに頼らず、Go標準ライブラリのHTTPサーバーとPure-Go SQLiteを採用。Cgo不要でポータブルに起動でき、メモリ効率と起動速度を極限まで高めました。クイズ採点をサーバーサイドで厳格に判定するREST API設計を取り入れています。",
 			demo:       "#00-index",
@@ -103,14 +120,31 @@ func SeedData(db *sql.DB) error {
 	}
 
 	for _, w := range works {
-		_, err = tx.Exec(workQuery, w.id, w.title, w.category, w.tagline, w.desc, w.techs, w.highlights, w.demo, w.github, w.featured)
+		_, err = tx.Exec(
+			workQuery,
+			w.id, w.title, w.category, w.tagline,
+			w.desc, w.techs, w.highlights, w.demo,
+			w.github, w.featured,
+		)
 		if err != nil {
 			return fmt.Errorf("制作物シードエラー (%s): %w", w.id, err)
 		}
 	}
 
-	// 3. 活動・学習記録 (Activity Logs) 投入
-	logQuery := `INSERT INTO activity_logs (id, date, title, category, content, metrics) VALUES (?, ?, ?, ?, ?, ?)`
+	// 3. 活動・学習記録 (Activity Logs) 投入・更新
+	logQuery := `
+INSERT INTO activity_logs (
+	id, date, title, category, content, metrics
+)
+VALUES (?, ?, ?, ?, ?, ?)
+ON CONFLICT(id) DO UPDATE SET
+	date = excluded.date,
+	title = excluded.title,
+	category = excluded.category,
+	content = excluded.content,
+	metrics = excluded.metrics
+`
+
 	logs := []struct {
 		id, date, title, category, content, metrics string
 	}{
@@ -149,14 +183,30 @@ func SeedData(db *sql.DB) error {
 	}
 
 	for _, l := range logs {
-		_, err = tx.Exec(logQuery, l.id, l.date, l.title, l.category, l.content, l.metrics)
+		_, err = tx.Exec(
+			logQuery,
+			l.id, l.date, l.title, l.category, l.content, l.metrics,
+		)
 		if err != nil {
 			return fmt.Errorf("活動記録シードエラー (%s): %w", l.id, err)
 		}
 	}
 
-	// 4. クイズ問題 (Quiz Questions) 投入
-	quizQuery := `INSERT INTO quiz_questions (id, question, category, options, correct_index, explanation, points) VALUES (?, ?, ?, ?, ?, ?, ?)`
+	// 4. クイズ問題 (Quiz Questions) 投入・更新
+	quizQuery := `
+INSERT INTO quiz_questions (
+	id, question, category, options, correct_index, explanation, points
+)
+VALUES (?, ?, ?, ?, ?, ?, ?)
+ON CONFLICT(id) DO UPDATE SET
+	question = excluded.question,
+	category = excluded.category,
+	options = excluded.options,
+	correct_index = excluded.correct_index,
+	explanation = excluded.explanation,
+	points = excluded.points
+`
+
 	quizzes := []struct {
 		id, question, category, options, explanation string
 		correctIndex, points                         int
@@ -200,14 +250,29 @@ func SeedData(db *sql.DB) error {
 	}
 
 	for _, q := range quizzes {
-		_, err = tx.Exec(quizQuery, q.id, q.question, q.category, q.options, q.correctIndex, q.explanation, q.points)
+		_, err = tx.Exec(
+			quizQuery,
+			q.id, q.question, q.category, q.options,
+			q.correctIndex, q.explanation, q.points,
+		)
 		if err != nil {
 			return fmt.Errorf("クイズシードエラー (%s): %w", q.id, err)
 		}
 	}
 
-	// 5. ランダム生成器コンテンツ (Random Cards) 投入
-	randomQuery := `INSERT INTO random_cards (id, category, title, content, code_snippet) VALUES (?, ?, ?, ?, ?)`
+	// 5. ランダム生成器コンテンツ (Random Cards) 投入・更新
+	randomQuery := `
+INSERT INTO random_cards (
+	id, category, title, content, code_snippet
+)
+VALUES (?, ?, ?, ?, ?)
+ON CONFLICT(id) DO UPDATE SET
+	category = excluded.category,
+	title = excluded.title,
+	content = excluded.content,
+	code_snippet = excluded.code_snippet
+`
+
 	randoms := []struct {
 		id, category, title, content, snippet string
 	}{
@@ -242,7 +307,10 @@ func SeedData(db *sql.DB) error {
 	}
 
 	for _, r := range randoms {
-		_, err = tx.Exec(randomQuery, r.id, r.category, r.title, r.content, r.snippet)
+		_, err = tx.Exec(
+			randomQuery,
+			r.id, r.category, r.title, r.content, r.snippet,
+		)
 		if err != nil {
 			return fmt.Errorf("ランダムシードエラー (%s): %w", r.id, err)
 		}
@@ -253,6 +321,6 @@ func SeedData(db *sql.DB) error {
 		return fmt.Errorf("シードデータコミットエラー: %w", err)
 	}
 
-	log.Println("シードデータの投入が成功しました！")
+	log.Println("シードデータの投入・更新が成功しました！")
 	return nil
 }
