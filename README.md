@@ -1,4 +1,4 @@
-# FUWAFUWA PORTFOLIO ⚡
+# FUWAFUWA PORTFOLIO
 ### Digital Playground × Editorial / Magazine // Interactive Profile Application
 
 雑誌の特集記事をめくるような知的好奇心と、ゲーム空間を探索・操作して遊べる仕掛けを融合させ、Go言語による堅牢なバックエンドとPure-Go SQLite、そしてVanilla JavaScriptによって構築されています。
