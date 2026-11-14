@@ -431,6 +431,7 @@ p {
   font-size: 0.85rem;
   color: var(--color-cyan) !important;
   margin-top: 1rem;
+  max-width: 100%;
   overflow-x: auto;
   line-height: 1.5;
 }
