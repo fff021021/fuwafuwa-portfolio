@@ -1,0 +1,114 @@
+/* レイアウト＆グリッド設計 */
+
+.page-wrapper {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 1.25rem 4rem;
+  position: relative;
+}
+
+/* トップバー */
+.editorial-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: var(--border-bold);
+  padding: 0.6rem 0;
+  margin-bottom: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* マーキー（流れるテッカー） */
+.marquee-strip {
+  background: var(--color-yellow);
+  color: var(--color-black);
+  border-top: var(--border-thick);
+  border-bottom: var(--border-thick);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0.4rem 0;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 0 var(--color-black);
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 22s linear infinite;
+}
+
+/* メインセクション間隔 */
+.magazine-section {
+  padding: 3rem 0;
+  position: relative;
+}
+
+.magazine-section + .magazine-section {
+  border-top: var(--border-bold);
+  margin-top: 2rem;
+}
+
+/* 非対称マガジングリッド */
+.editorial-grid-2-1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.editorial-grid-1-2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.editorial-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.editorial-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+/* レスポンシブ */
+@media (max-width: 992px) {
+  .editorial-grid-2-1,
+  .editorial-grid-1-2,
+  .editorial-grid-3,
+  .editorial-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-wrapper {
+    padding: 0 0.8rem 3rem;
+  }
+  .editorial-topbar {
+    font-size: 0.75rem;
+  }
+}

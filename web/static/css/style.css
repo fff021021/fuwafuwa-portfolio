@@ -1,0 +1,452 @@
+/* メインスタイル統合 */
+@import url('./reset.css');
+@import url('./variables.css');
+@import url('./typography.css');
+@import url('./layout.css');
+@import url('./components.css');
+@import url('./animations.css');
+
+/* 背景ドットマトリクス（雑誌の網点＋デジタルグリッド） */
+body {
+  background-color: var(--color-paper-bg);
+  background-image: radial-gradient(var(--color-gray-300) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+/* ========================================================
+   00 / INDEX (Hero / Magazine Cover)
+   ======================================================== */
+.hero-cover {
+  position: relative;
+  padding: 2.5rem 0 3.5rem;
+}
+
+.hero-header {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.hero-title-box {
+  background: var(--color-white);
+  border: var(--border-bold);
+  box-shadow: 10px 10px 0 var(--color-black);
+  padding: 2rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-title-box::after {
+  content: 'ISSUE 01 // 2026';
+  position: absolute;
+  top: 1rem;
+  right: -2rem;
+  background: var(--color-pink);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 0.3rem 3rem;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.hero-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.hero-logo-icon {
+  width: 72px;
+  height: 72px;
+  background: var(--color-pink);
+  border: var(--border-bold);
+  box-shadow: 4px 4px 0 var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-title-text {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 8vw, 6.2rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--color-black);
+  text-transform: uppercase;
+}
+
+.hero-title-text span.accent-pink {
+  color: var(--color-pink);
+  -webkit-text-stroke: 2px var(--color-black);
+}
+
+.hero-title-text span.accent-cyan {
+  color: var(--color-cyan);
+  -webkit-text-stroke: 2px var(--color-black);
+}
+
+.hero-subrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: var(--border-thick);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hero-badge-group {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* 隠し要素ヒントバナー */
+.secret-hint-banner {
+  background: var(--color-black);
+  color: var(--color-yellow);
+  border: var(--border-thick);
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-cyan);
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.secret-hint-banner span.blink {
+  animation: pulseBorder 1.5s infinite;
+  background: var(--color-pink);
+  color: #fff;
+  padding: 0.1rem 0.5rem;
+}
+
+/* ========================================================
+   01 / ABOUT (Creator Profile & Status)
+   ======================================================== */
+.profile-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  line-height: 1.2;
+  color: var(--color-black);
+  border-left: 6px solid var(--color-pink);
+  padding-left: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.profile-bio {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--color-gray-900);
+  margin-bottom: 1.5rem;
+}
+
+.keyword-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.keyword-chip {
+  background: var(--color-white);
+  border: var(--border-thin);
+  box-shadow: 2px 2px 0 var(--color-black);
+  padding: 0.35rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all var(--transition-fast);
+}
+
+.keyword-chip:hover {
+  background: var(--color-cyan);
+  transform: translateY(-2px);
+}
+
+/* ========================================================
+   02 / INTERESTS (Feature Articles)
+   ======================================================== */
+.interest-card {
+  background: var(--color-white);
+  border: var(--border-bold);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.interest-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-pink);
+}
+
+.interest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: var(--border-thin);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.interest-category {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--color-pink);
+}
+
+.interest-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.interest-body {
+  font-size: 0.95rem;
+  color: var(--color-gray-700);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.interest-footer {
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--color-gray-300);
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-gray-700);
+}
+
+/* ========================================================
+   03 / ARCHIVE (Works & Activity Logs)
+   ======================================================== */
+.archive-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.category-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.category-tab-btn {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  background: var(--color-white);
+  border: var(--border-thin);
+  box-shadow: 2px 2px 0 var(--color-black);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.category-tab-btn.active,
+.category-tab-btn:hover {
+  background: var(--color-cyan);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--color-black);
+}
+
+.search-input-box {
+  display: flex;
+  align-items: center;
+  background: var(--color-white);
+  border: var(--border-thin);
+  box-shadow: 2px 2px 0 var(--color-black);
+  padding: 0.3rem 0.8rem;
+  min-width: 240px;
+}
+
+.search-input-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.75rem;
+}
+
+.work-card {
+  background: var(--color-white);
+  border: var(--border-bold);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.work-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-cyan);
+}
+
+.work-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.work-card-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.work-card-tagline {
+  font-size: 0.9rem;
+  color: var(--color-gray-700);
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.work-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.work-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: var(--border-thin);
+  padding-top: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+/* ========================================================
+   04 / PLAY (Interactive Playground & Quiz)
+   ======================================================== */
+.play-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .play-split-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.generator-display-box {
+  background: var(--color-gray-900);
+  color: var(--color-white);
+  border: var(--border-bold);
+  box-shadow: var(--shadow-yellow);
+  padding: 1.5rem;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.generator-result-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--color-yellow);
+  margin-bottom: 0.5rem;
+}
+
+.generator-result-body {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+.generator-code-block {
+  background: rgba(0,0,0,0.5);
+  border-left: 3px solid var(--color-cyan);
+  padding: 0.6rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-cyan);
+  margin-top: 0.8rem;
+  overflow-x: auto;
+}
+
+/* フッター */
+.editorial-footer {
+  margin-top: 4rem;
+  border-top: var(--border-bold);
+  padding: 2.5rem 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--color-black);
+}
+
+.footer-info {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-gray-700);
+}
+
+/* サウンドコントロールボタン */
+.sound-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border: var(--border-thin);
+  background: var(--color-white);
+  box-shadow: 2px 2px 0 var(--color-black);
+  cursor: pointer;
+}
+.sound-toggle-btn.active {
+  background: var(--color-yellow);
+}

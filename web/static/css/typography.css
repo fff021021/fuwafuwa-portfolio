@@ -1,0 +1,104 @@
+/* 雑誌風タイポグラフィ */
+
+.text-display-huge {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 10vw, 7.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.text-display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.text-display-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: -0.02em;
+}
+
+.text-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* 雑誌のセクションヘッダー */
+.section-headline {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  border-bottom: var(--border-bold);
+  padding-bottom: 0.75rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.section-number {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--color-pink);
+  line-height: 1;
+  text-shadow: 2px 2px 0 var(--color-black);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: var(--color-black);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.section-label {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  background: var(--color-yellow);
+  padding: 0.2rem 0.6rem;
+  border: var(--border-thin);
+  font-weight: 700;
+  box-shadow: 2px 2px 0 var(--color-black);
+}
+
+/* 雑誌風バーコード装飾 */
+.barcode-decor {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.barcode-bars {
+  display: flex;
+  height: 28px;
+  gap: 2px;
+  align-items: stretch;
+}
+.barcode-bar {
+  background: var(--color-black);
+  width: 2px;
+}
+.barcode-bar.w-2 { width: 4px; }
+.barcode-bar.w-3 { width: 6px; }
+.barcode-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+}

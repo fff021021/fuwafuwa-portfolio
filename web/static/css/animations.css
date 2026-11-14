@@ -1,0 +1,91 @@
+/* アニメーション定義 */
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-1deg);
+  }
+}
+
+@keyframes rotateInfinite {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulseBorder {
+  0%, 100% {
+    box-shadow: 4px 4px 0px var(--color-pink);
+  }
+  50% {
+    box-shadow: 4px 4px 0px var(--color-cyan);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.anim-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.anim-float-reverse {
+  animation: floatReverse 4.5s ease-in-out infinite;
+}
+
+.anim-spin-slow {
+  animation: rotateInfinite 18s linear infinite;
+}
+
+.anim-pulse {
+  animation: pulseBorder 2s infinite;
+}
+
+/* 隠しデバッグオーバーレイ用のアニメーション */
+.debug-overlay {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(18, 18, 22, 0.95);
+  color: #00FF66;
+  border: 2px solid #00FF66;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 1rem;
+  max-width: 320px;
+  z-index: 9999;
+  display: none;
+  backdrop-filter: blur(4px);
+}
+
+.debug-overlay.active {
+  display: block;
+  animation: popIn 0.25s ease-out;
+}

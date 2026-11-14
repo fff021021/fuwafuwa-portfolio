@@ -1,0 +1,412 @@
+/* ネオブルータリズム・エディトリアル コンポーネント */
+
+/* ネオブルータリズム カード */
+.brutal-card {
+  background: var(--color-white);
+  border: var(--border-bold);
+  box-shadow: var(--shadow-md);
+  padding: 1.5rem;
+  position: relative;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.brutal-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.brutal-card.pink-shadow {
+  box-shadow: var(--shadow-pink);
+}
+.brutal-card.pink-shadow:hover {
+  box-shadow: 7px 7px 0px var(--color-pink);
+}
+
+.brutal-card.cyan-shadow {
+  box-shadow: var(--shadow-cyan);
+}
+.brutal-card.cyan-shadow:hover {
+  box-shadow: 7px 7px 0px var(--color-cyan);
+}
+
+.brutal-card.yellow-shadow {
+  box-shadow: var(--shadow-yellow);
+}
+.brutal-card.yellow-shadow:hover {
+  box-shadow: 7px 7px 0px var(--color-yellow);
+}
+
+.brutal-card-dark {
+  background: var(--color-black);
+  color: var(--color-white);
+  border: var(--border-bold);
+  box-shadow: var(--shadow-pink);
+  padding: 1.5rem;
+}
+
+/* ネオブルータリズム ボタン */
+.brutal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 900;
+  padding: 0.6rem 1.4rem;
+  background: var(--color-white);
+  border: var(--border-bold);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-black);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  user-select: none;
+}
+
+.brutal-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-md);
+}
+
+.brutal-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 var(--color-black);
+}
+
+.brutal-btn-pink {
+  background: var(--color-pink);
+  color: var(--color-white);
+}
+
+.brutal-btn-cyan {
+  background: var(--color-cyan);
+  color: var(--color-black);
+}
+
+.brutal-btn-yellow {
+  background: var(--color-yellow);
+  color: var(--color-black);
+}
+
+.brutal-btn-dark {
+  background: var(--color-black);
+  color: var(--color-white);
+  box-shadow: var(--shadow-cyan);
+}
+
+/* バッジ & ラベル */
+.brutal-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border: var(--border-thin);
+  box-shadow: 2px 2px 0 var(--color-black);
+  text-transform: uppercase;
+}
+
+.brutal-badge-pink { background: var(--color-pink); color: #fff; }
+.brutal-badge-cyan { background: var(--color-cyan); color: #000; }
+.brutal-badge-yellow { background: var(--color-yellow); color: #000; }
+.brutal-badge-dark { background: var(--color-black); color: #fff; }
+
+/* チケット型ナビゲーションアイテム */
+.nav-ticket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.nav-ticket {
+  background: var(--color-white);
+  border: var(--border-bold);
+  box-shadow: var(--shadow-md);
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.nav-ticket::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background: var(--color-black);
+}
+
+.nav-ticket:nth-child(1)::before { background: var(--color-pink); }
+.nav-ticket:nth-child(2)::before { background: var(--color-cyan); }
+.nav-ticket:nth-child(3)::before { background: var(--color-yellow); }
+.nav-ticket:nth-child(4)::before { background: var(--color-purple); }
+
+.nav-ticket:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.nav-ticket-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.nav-ticket-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 900;
+  margin-top: 0.25rem;
+}
+
+.nav-ticket-desc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--color-gray-700);
+  margin-top: 0.5rem;
+}
+
+/* ドラッグ可能ステッカー */
+.sticker-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.sticker {
+  position: absolute;
+  pointer-events: auto;
+  cursor: grab;
+  user-select: none;
+  border: var(--border-bold);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.4rem 0.8rem;
+  transition: transform 0.1s ease-out;
+  transform-origin: center center;
+}
+
+.sticker:active {
+  cursor: grabbing;
+  transform: scale(1.08) rotate(3deg) !important;
+  box-shadow: var(--shadow-lg);
+}
+
+.sticker-yellow {
+  background: var(--color-yellow);
+  color: var(--color-black);
+  transform: rotate(-5deg);
+}
+
+.sticker-pink {
+  background: var(--color-pink);
+  color: var(--color-white);
+  transform: rotate(4deg);
+}
+
+.sticker-cyan {
+  background: var(--color-cyan);
+  color: var(--color-black);
+  transform: rotate(-2deg);
+}
+
+.sticker-star {
+  border-radius: var(--radius-pill);
+  padding: 0.5rem 1rem;
+}
+
+/* ステータスバー（レトロゲーム風） */
+.status-bar-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.status-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.status-bar-label {
+  width: 140px;
+  font-weight: 700;
+}
+
+.status-bar-track {
+  flex: 1;
+  height: 18px;
+  background: var(--color-gray-200);
+  border: var(--border-thin);
+  position: relative;
+  overflow: hidden;
+}
+
+.status-bar-fill {
+  height: 100%;
+  background: var(--color-pink);
+  transition: width 1s ease-out;
+}
+
+.status-bar-value {
+  font-weight: 800;
+  width: 45px;
+  text-align: right;
+}
+
+/* クイズUI */
+.quiz-box {
+  background: var(--color-white);
+  border: var(--border-bold);
+  box-shadow: var(--shadow-cyan);
+  padding: 2rem;
+}
+
+.quiz-option-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: var(--color-paper-bg);
+  border: var(--border-thick);
+  box-shadow: var(--shadow-sm);
+  padding: 0.9rem 1.2rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  position: relative;
+}
+
+.quiz-option-btn:hover:not(:disabled) {
+  background: var(--color-yellow);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-md);
+}
+
+.quiz-option-btn.selected {
+  background: var(--color-cyan);
+  border-color: var(--color-black);
+}
+
+.quiz-option-btn.correct {
+  background: #10B981 !important;
+  color: #fff !important;
+}
+
+.quiz-option-btn.wrong {
+  background: var(--color-pink) !important;
+  color: #fff !important;
+}
+
+/* モーダルダイアログ */
+.brutal-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.brutal-modal-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.brutal-modal-content {
+  background: var(--color-white);
+  border: var(--border-bold);
+  box-shadow: 12px 12px 0px var(--color-pink);
+  max-width: 720px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 2rem;
+  transform: translateY(20px);
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+.brutal-modal-backdrop.active .brutal-modal-content {
+  transform: translateY(0);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  background: var(--color-yellow);
+  border: var(--border-thick);
+  box-shadow: 2px 2px 0 var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.modal-close-btn:hover {
+  background: var(--color-pink);
+  color: #fff;
+}
+
+/* トースト通知（実績解除・シークレット発見用） */
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 1100;
+  pointer-events: none;
+}
+
+.brutal-toast {
+  pointer-events: auto;
+  background: var(--color-yellow);
+  color: var(--color-black);
+  border: var(--border-bold);
+  box-shadow: var(--shadow-md);
+  padding: 0.8rem 1.4rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transform: translateX(120%);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.brutal-toast.show {
+  transform: translateX(0);
+}
