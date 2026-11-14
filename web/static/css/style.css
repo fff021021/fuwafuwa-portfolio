@@ -488,3 +488,59 @@ p {
   background: var(--color-yellow);
   color: var(--color-black) !important;
 }
+
+/* ========================================
+   MOBILE GACHA WIDTH FIX
+   ======================================== */
+
+@media (max-width: 640px) {
+
+  /* Play全体 */
+  .play-split-grid {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Grid直下の要素 */
+  .play-split-grid > * {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* ガチャボックス */
+  .generator-display-box {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  /* 結果タイトル */
+  .generator-result-title {
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* 結果本文 */
+  .generator-result-body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  /* 結果内のコード */
+  .generator-code-block {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: auto;
+  }
+}
